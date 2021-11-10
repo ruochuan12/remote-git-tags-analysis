@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="./loadImage.js"></script>
+    <script>
+        function promisify(original){
+            function fn(...args){
+                return new Promise((resolve, reject) => {
+                    args.push((err, ...values) => {
+                        if(err){
+                            return reject(err);
+                        }
+                        resolve(values);
+                    });
+                    // original.apply(this, args);
+                    Reflect.apply(original, this, args);
+                });
+            }
+            return fn;
+        }
+
+        const loadImagePromise = promisify(loadImage);
+        async function load(){
+            try{
+                const res = await loadImagePromise(imageSrc);
+                console.log(res);
+            }
+            catch(err){
+                console.log(err);
+            }
+        }
+        load();
+    </script>
+</body>
+
+</html>
