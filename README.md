@@ -3,7 +3,7 @@ highlight: darcula
 theme: smartblue
 ---
 
-# 从22行有趣的源码库中，我悟到了看不懂源码是因为源码太长
+# 从22行有趣的源码库中，我学到了 callback promisify 化的 Node.js 源码实现
 
 ## 1. 前言
 
